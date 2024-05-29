@@ -8,7 +8,6 @@ import HomeHot from './components/HomeHot.vue'
 import HomeProduct from './components/HomeProduct.vue'
 
 
-
 </script>
 
 <template>
