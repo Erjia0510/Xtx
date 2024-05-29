@@ -7,6 +7,13 @@ import App from './App.vue'
 import router from './router'
 
 import { getCategory } from '@/apis/testApi'
+
+// 引入样式
+import '@/styles/common.scss'
+
+
+
+
 getCategory().then(res => {
   console.log(res);
 })
