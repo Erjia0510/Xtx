@@ -10,7 +10,7 @@ import { useCategoryStore } from "@/stores/category";
 import { onMounted } from "vue";
 const categoryStore = useCategoryStore()
 
-onMounted(()=>{
+onMounted(() => {
   categoryStore.getCategory()
 })
 </script>
@@ -21,6 +21,9 @@ onMounted(()=>{
     <LayoutHeader />
     <LayoutFixed />
     <!-- 二级路由出口 -->
+    <!-- 添加key破环复用机制  强制销毁重建 -->
+
+    <!-- <RouterView :key="$route.fullPath" /> -->
     <RouterView />
     <LayoutFooter />
   </div>
