@@ -1,43 +1,16 @@
 <script setup>
-import { getCategoryApi } from '@/apis/categoryApi.js'
-import { ref, onMounted } from "vue";
-import { getBannerAPI } from '@/apis/bannerApi'
-import { useRoute } from 'vue-router';
 import Goodsitem from '../Home/components/Goodsitem.vue';
-import { onBeforeRouteUpdate } from 'vue-router';
 
-
-// 获取当前路由
-const categoryList = ref([])
-const route = useRoute()
-const getcategory = async (id = route.params.id) => {
-  const res = await getCategoryApi(id)
-  console.log(res);
-  categoryList.value = res.data.result
-}
-// 路由参数变化的时候，可以把分类数据接口重新发送
-onBeforeRouteUpdate((to) => {
-  getcategory(to.params.id)
-})
+import { useBanner } from './composables/useBanner'
+import { useCategory } from './composables/usecategory';
 
 
 
 
 
-//banner 
-const bannerList = ref([])
-const getBanner = async () => {
-  const res = await getBannerAPI({
-    distributionSite: 2
-  })
-  // console.log(res);
-  bannerList.value = res.data.result
-}
+const { bannerList } = useBanner()
+const { categoryList } = useCategory()
 
-onMounted(() => {
-
-  getBanner()
-})
 
 
 
