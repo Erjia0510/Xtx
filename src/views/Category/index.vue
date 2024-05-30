@@ -3,12 +3,16 @@ import { getCategoryApi } from '@/apis/categoryApi.js'
 import { ref, onMounted } from "vue";
 import { getBannerAPI } from '@/apis/bannerApi'
 import { useRoute } from 'vue-router';
+import Goodsitem from '../Home/components/Goodsitem.vue';
+
+
 
 // 获取当前路由
 const categoryList = ref([])
 const route = useRoute()
 const getcategory = async () => {
   const res = await getCategoryApi(route.params.id)
+  console.log(res);
   categoryList.value = res.data.result
 }
 
@@ -49,6 +53,27 @@ onMounted(() => {
             <img :src="item.imgUrl" alt="">
           </el-carousel-item>
         </el-carousel>
+      </div>
+
+      <!-- 分类组件 -->
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li v-for="i in categoryList.children" :key="i.id">
+            <RouterLink to="/">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div class="ref-goods" v-for="item in categoryList.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <Goodsitem v-for="good in item.goods" :good="good" :key="good.id" />
+        </div>
       </div>
     </div>
   </div>
