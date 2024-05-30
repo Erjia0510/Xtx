@@ -6,7 +6,7 @@ import { ref, onMounted} from "vue";
 const newList = ref([])
 const getHome = async ()=>{
   const res = await getHomeApi()
-  console.log(res);
+  // console.log(res);
   newList.value  = res.data.result
 }
 onMounted(()=>{

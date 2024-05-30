@@ -7,7 +7,7 @@ import {getBannerAPI} from '@/apis/bannerApi'
 const bannerList = ref([])
 const getBanner = async ()=>{
   const res = await getBannerAPI()
-  console.log(res);
+  // console.log(res);
   bannerList.value = res.data.result
 }
 
