@@ -6,3 +6,4 @@ export const getGoodsApi = () => {
     url: '/home/goods'
   })
 }
+

@@ -1,32 +1,32 @@
 <script setup>
 import HomePanel from './HomePanel.vue';
-import {getHomeApi} from '@/apis/homeApi.js';
-import { ref, onMounted} from "vue";
+import { getHomeApi } from '@/apis/homeApi.js';
+import { ref, onMounted } from "vue";
 
 const newList = ref([])
-const getHome = async ()=>{
+const getHome = async () => {
   const res = await getHomeApi()
   // console.log(res);
-  newList.value  = res.data.result
+  newList.value = res.data.result
 }
-onMounted(()=>{
-getHome()
+onMounted(() => {
+  getHome()
 })
 
 </script>
 
 <template>
-  <HomePanel title="新鲜好物" subtitle= "">
-<ul class="goods-list">
-    <li v-for="item in newList" :key="item.id">
-      <RouterLink to="/">
-        <img :src="item.picture" alt="" />
-        <p class="name">{{ item.name }}</p>
-        <p class="price">&yen;{{ item.price }}</p>
-      </RouterLink>
-    </li>
-  </ul>
-    </HomePanel>
+  <HomePanel title="新鲜好物" subtitle="">
+    <ul class="goods-list">
+      <li v-for="item in newList" :key="item.id">
+        <RouterLink :to="`/detail/${item.id}`">
+          <img :src="item.picture" alt="" />
+          <p class="name">{{ item.name }}</p>
+          <p class="price">&yen;{{ item.price }}</p>
+        </RouterLink>
+      </li>
+    </ul>
+  </HomePanel>
   <!-- 下面是插槽主体内容模版
   
   -->
