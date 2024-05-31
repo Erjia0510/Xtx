@@ -2,11 +2,11 @@
 
 
 import { ref } from 'vue'
-import { loginApi } from '@/apis/userApi'
+
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router'
-import router from '@/router'
+import { useUserStore } from '@/stores/user'
 
 //表单校验：账户名和密码
 const form = ref({
@@ -43,16 +43,18 @@ const rules = {
 
 //获取form实例
 const formRef = ref(null)
+const Router = useRouter()
+const useStore = useUserStore()
 const subform = () => {
-  const Router = useRouter()
+
   formRef.value.validate(async (valid) => {
     //表单都通过校验 valid才true
     if (valid) {
       const { account, password } = form.value
-      const res = await loginApi({ account, password })
-      console.log(res);
+      await useStore.getUserInfo({ account, password })
+
       ElMessage({ type: 'success', message: '登录成功' })
-      router.replace({ path: '/' })
+      Router.replace({ path: '/' })
     }
 
   })
