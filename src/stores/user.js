@@ -9,13 +9,17 @@ export const useUserStore = defineStore('user', () => {
 
   const getUserInfo = async ({ account, password }) => {
     const res = await loginApi({ account, password })
-
+    console.log(res);
     userInfo.value = res.data.result
   }
+  const clearUserInfo = async () => {
+    userInfo.value = {}
 
+  }
   return {
     userInfo,
-    getUserInfo
+    getUserInfo,
+    clearUserInfo
   }
 
 
